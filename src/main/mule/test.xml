@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="1ce302b7-172b-4880-a611-d1db709f353a" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="testFlow" doc:id="3266f6ed-6394-4e53-906e-f729b2f75982" >
+		<http:listener doc:name="Listener" doc:id="e2972654-63e3-410a-8fb2-1533dba20c4d" config-ref="HTTP_Listener_config" path="/mmp"/>
+		<logger level="INFO" doc:name="Logger" doc:id="1b7a2055-4da7-4f0d-b6d7-1b4d942a8f71" message='#["In testFlow application..."]'/>
+		<ee:transform doc:name="Transform Message" doc:id="a5b1eb76-7527-4aa1-979a-08a92e88c63c" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message":"testFlow app deployed to CloudHub 2.0"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
