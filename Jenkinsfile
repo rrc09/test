@@ -20,9 +20,10 @@ pipeline {
         stage('Deploy to CloudHub 2.0') {
             steps {
                 configFileProvider([configFile(fileId: 'maven-settings', variable: 'MVN_SETTINGS')]) {
-                    sh """
-                        mvn clean deploy -DmuleDeploy -s $MVN_SETTINGS
-                    """
+                    bat """
+    mvn clean deploy -DmuleDeploy -s %MVN_SETTINGS%
+"""
+
                 }
             }
         }
