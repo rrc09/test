@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven 3.8.6' // or your installed version in Jenkins
+        maven 'Maven 3.8.8' // or your installed version in Jenkins
         jdk 'JDK 17'        // match your pom.xml Java version
     }
 
